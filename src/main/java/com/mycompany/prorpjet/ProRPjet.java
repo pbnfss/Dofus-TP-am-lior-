@@ -37,11 +37,47 @@ public class ProRPjet {
             if(choixChoix == 2)
             {    
                 choixZone = f.affZone();
+                if(choixZone == 1)
+                {
+                   System.out.println("Vous vous rendez dans la forêt");
+                   s.next(); 
+                }
+                if(choixZone == 2)
+                {
+                   System.out.println("Vous vous dirigez vers les champs");
+                   s.next(); 
+                }
+                if(choixZone == 3)
+                {
+                    System.out.println("Vous vous atteignez la zone rocheuse");
+                    s.next();
+                }
             }
             if(choixChoix == 3)
             {
                 choixBoss = f.affBoss();
-            } 
+                               
+                if(choixBoss == 1)
+                {
+                   System.out.println("Vous voici devant le terrible MILIMILOU");
+                   s.next(); 
+                }
+                if(choixBoss == 2)
+                {
+                   System.out.println("Vous vous attaquez au pitoyable MOB L'EPONGE");
+                   s.next(); 
+                }
+                if(choixBoss == 3)
+                {
+                    System.out.println("Vous foncez sur le colossal BOUFTOU ROYAL");
+                    s.next();
+                }
+            }
+            if(choixChoix == 4)
+            {
+                System.out.println("Vous vous posez à l'auberge, tranquille");
+                s.next();
+            }
         }
 
     }
