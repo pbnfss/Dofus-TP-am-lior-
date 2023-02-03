@@ -18,6 +18,80 @@ public class ProRPjet {
         int choixChoix = 0; 
         int choixZone = 0;
         int choixBoss = 0;
+        
+        // Zone I
+        Adversaire bouftou = new Adversaire("Bouftou affamé",
+                10,
+                10,
+                3,
+                5,
+                20,
+                false);
+        Adversaire tofu = new Adversaire("Tofu immature",
+                5,
+                5,
+                5,
+                3,
+                40,
+                false);
+        // Zone II
+        Adversaire sanglier = new Adversaire("Sanglier violent",
+                20,
+                20,
+                6,
+                10,
+                25,
+                false);
+        Adversaire tournesol = new Adversaire("Tournesol fou",
+                10,
+                10,
+                10,
+                6,
+                50,
+                false);
+        // Zone III
+        Adversaire craqueboule = new Adversaire("Craqueboule stupide",
+                40,
+                40,
+                12,
+                20,
+                30,
+                false);
+        Adversaire bandit = new Adversaire("Bandit hargneux",
+                20,
+                20,
+                20,
+                12,
+                60,
+                false);
+        
+        // Boss I
+        Adversaire milimilou = new Adversaire("Milimilou fourbe",
+                20,
+                20,
+                10,
+                10,
+                25,
+                true);
+
+        // Boss II
+        Adversaire mobEponge = new Adversaire("Mob l'Eponge carré",
+                40,
+                40,
+                20,
+                20,
+                30,
+                true);
+
+        // Boss III
+        Adversaire bouftouRoyal = new Adversaire("Bouftou Royal",
+                80,
+                80,
+                25,
+                25,
+                35,
+                true);
+
         /*
          * Lance l'introduction.
          * Lance le menu de création du personnage.

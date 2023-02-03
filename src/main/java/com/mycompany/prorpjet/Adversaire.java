@@ -14,9 +14,9 @@ public class Adversaire {
     private int pvMax;
     private int attaque;
     private int defense;
-    private double coupCritique;
+    private int coupCritique;
     private boolean boss;
-    public Adversaire(String unNom, int unNbPvActuel, int unNbPvMax, int uneAtk, int uneDef, double unCC, boolean estBoss)
+    public Adversaire(String unNom, int unNbPvActuel, int unNbPvMax, int uneAtk, int uneDef, int unCC, boolean estBoss)
     {        
         this.nomAdversaire = unNom;
         this.attaque = uneAtk;
@@ -75,7 +75,7 @@ public class Adversaire {
         this.defense = defense;
     }
 
-    public void setCoupCritique(double coupCritique) {
+    public void setCoupCritique(int coupCritique) {
         this.coupCritique = coupCritique;
     }
 
