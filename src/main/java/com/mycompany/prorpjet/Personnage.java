@@ -15,18 +15,74 @@ public class Personnage {
     private int pvMax;
     private int attaque;
     private int defense;
-    private double coupCritique;
+    private int coupCritique;
     private int kama;
 
-    public Personnage(String nomPersonnage, String classePersonnage, int pvActuel, int pvMax, int attaque, int defense, double coupCritique, int kama) {
+    public Personnage(String nomPersonnage, String classePersonnage, int pvActuel, int pvMax, int attaque, int defense, int coupCritique, int kama) 
+    {
         this.nomPersonnage = nomPersonnage;
         this.classePersonnage = classePersonnage;
-        this.pvActuel = pvActuel;
+        
         this.pvMax = pvMax;
         this.attaque = attaque;
         this.defense = defense;
         this.coupCritique = coupCritique;
         this.kama = kama;
+        
+        switch(this.classePersonnage)
+        {
+            case "Féca":
+                this.defense += 2;
+                this.attaque -= 2;
+                break;
+            case "Iop":
+                this.attaque += 2;
+                this.coupCritique -= 10;
+                break;
+            case "Cra":
+                this.coupCritique += 10;
+                this.defense -= 2;
+                break;
+            case "Sadida":
+                this.attaque += 2;
+                this.pvMax -= 10;
+                break;
+            case "Osamodas":
+                this.pvMax += 10;
+                this.attaque -= 2;
+                break;
+            case "Sacrieur":
+                this.pvMax += 10;
+                this.defense -= 2;
+                break;
+            case "Pandawa":
+                this.pvMax += 10;
+                this.coupCritique -= 10;
+                break;
+            case "Eniripsa":
+                this.defense += 2;
+                this.coupCritique -= 10;
+                break;
+            case "Sram":
+                this.attaque += 2;
+                this.defense -= 2;
+                break;
+            case "Xélor":
+                this.defense += 2;
+                this.pvMax -= 10;
+                break;
+            case "Enutrof":
+                this.coupCritique += 10;
+                this.attaque -= 2;
+                break;
+            case "Ecaflip":
+                this.coupCritique += 10;
+                this.pvMax -= 10;
+                break;
+            
+                
+        }
+        this.pvActuel = this.pvMax;
     }
 
     public String getNomPersonnage() {
@@ -81,7 +137,7 @@ public class Personnage {
         return coupCritique;
     }
 
-    public void setCoupCritique(double coupCritique) {
+    public void setCoupCritique(int coupCritique) {
         this.coupCritique = coupCritique;
     }
 
@@ -93,7 +149,18 @@ public class Personnage {
         this.kama = kama;
     }
 
+    
+    public void affStats() {
+        System.out.println("Ton nom est " + nomPersonnage + ".");
+        System.out.println("Tu es un disciple " + classePersonnage + " !");
+        System.out.println("Tu as actuellement " + pvActuel + "/" + pvMax + " PV.");
+        System.out.println("Tu as une attaque de " + attaque + ".");
+        System.out.println("Tu as une défense de " + defense + ".");
+        System.out.println("Tu as " + coupCritique + "% de coup critique !");
+        System.out.println("Enfin, tu as "+ kama + " kamas.");
+    }
 
+    
    
  
 }

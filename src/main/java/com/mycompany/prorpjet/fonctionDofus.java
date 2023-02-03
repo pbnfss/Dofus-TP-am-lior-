@@ -29,18 +29,18 @@ public class fonctionDofus {
         while(choix < 1 | choix > 12)
         {
             System.out.println("A quelle classe appartenez-vous ? (1-12)");
-            System.out.println("1 - Féca");
-            System.out.println("2 - Iop");
-            System.out.println("3 - Cra");
-            System.out.println("4 - Sadida");
-            System.out.println("5 - Osamodas");
-            System.out.println("6 - Sacrieur");
-            System.out.println("7 - Pandawa");
-            System.out.println("8 - Eniripsa");
-            System.out.println("9 - Sram");
-            System.out.println("10 - Xélor");
-            System.out.println("11 - Enutrof");
-            System.out.println("12 - Ecaflip");           
+            System.out.println("1 - Féca (+Def / -Atk)");
+            System.out.println("2 - Iop (+Atk / -Crit)");
+            System.out.println("3 - Cra (+Crit / -Def)");
+            System.out.println("4 - Sadida (+Atk / -PV)");
+            System.out.println("5 - Osamodas (+PV / -Atk)");
+            System.out.println("6 - Sacrieur (+PV / -Def)");
+            System.out.println("7 - Pandawa (+PV / -Crit)");
+            System.out.println("8 - Eniripsa (+Def / -Crit)");
+            System.out.println("9 - Sram (+Atk / -Def)");
+            System.out.println("10 - Xélor (+Def / -PV)");
+            System.out.println("11 - Enutrof (+Crit / -Atk)");
+            System.out.println("12 - Ecaflip (+Crit / -PV)");           
             
             try
             {
@@ -98,12 +98,13 @@ public class fonctionDofus {
     
     public Personnage creationPerso()
     {
-        Personnage p = new Personnage("", "",
+
+        
+        
+        Personnage p = new Personnage("", introduction(),
                 55, 55, 5, 5, 20, 150);
         
-        String classeDuJoueur = introduction();
-        p.setClassePersonnage(classeDuJoueur);
-        System.out.println("Quel est votre nom disciple " + classeDuJoueur 
+        System.out.println("Quel est votre nom disciple " + p.getClassePersonnage()
                 + " ?");
         
         String nomDuJoueur = s.next();

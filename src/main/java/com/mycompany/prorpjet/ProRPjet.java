@@ -15,7 +15,9 @@ public class ProRPjet {
     public static void main(String[] args) {
         fonctionDofus f = new fonctionDofus();
         Scanner s = new Scanner(System.in);
-        
         Personnage joueur = f.creationPerso();
+
+        joueur.affStats();
+
     }
 }
