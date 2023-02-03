@@ -114,6 +114,29 @@ public class fonctionDofus {
         
         return p;
     }
+    public int affChoix()
+    {
+        System.out.println("Que veux-tu faire aventurier ?");
+        System.out.println("1 - Aller sur la place marchande."); 
+        System.out.println("2 - Partir à l'aventure.");
+        System.out.println("3 - Affronter les gardiens de donjon.");
+        System.out.println("4 - Se reposer à l'auberge.");
+        return Integer.parseInt(s.next());
+    }
+    public int affZone()
+    {
+        System.out.println("1 - Partir dans la forêt d'Incarnam. (zone I)");
+        System.out.println("2 - Partir vers les champs d'Astrub. (zone II)");
+        System.out.println("3 - Partir vers le coin des craqueboules. (zone III)");
+        return Integer.parseInt(s.next());
+    }
+    public int affBoss()
+    {
+        System.out.println("1 - Affronter le Milimilou. (boss I)");
+        System.out.println("2 - Affronter Mob l'Eponge. (boss II)");
+        System.out.println("3 - Affronter le Bouftou Royal. (boss III)");  
+        return Integer.parseInt(s.next());
+    }
     /*
     public int alea()
     {
