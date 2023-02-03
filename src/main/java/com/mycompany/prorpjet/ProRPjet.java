@@ -11,15 +11,11 @@ import java.util.Scanner;
  * @author erwan
  */
 public class ProRPjet {
-
+    
     public static void main(String[] args) {
-        int randomNum;
+        fonctionDofus f = new fonctionDofus();
         Scanner s = new Scanner(System.in);
-        while (true)
-        {
-            randomNum = (int)(Math.random() * 101);  
-            System.out.println(randomNum);
-            s.next();
-        }
+        
+        Personnage joueur = f.creationPerso();
     }
 }
