@@ -16,7 +16,15 @@ public class Adversaire {
     private int defense;
     private int coupCritique;
     private boolean boss;
-    public Adversaire(String unNom, int unNbPvActuel, int unNbPvMax, int uneAtk, int uneDef, int unCC, boolean estBoss)
+    private int zone;
+    public Adversaire(String unNom,
+            int unNbPvActuel,
+            int unNbPvMax,
+            int uneAtk,
+            int uneDef,
+            int unCC,
+            boolean estBoss,
+            int dansZone)
     {        
         this.nomAdversaire = unNom;
         this.attaque = uneAtk;
@@ -25,6 +33,15 @@ public class Adversaire {
         this.pvActuel = unNbPvActuel;
         this.pvMax = unNbPvMax;
         this.boss = estBoss;
+        this.zone = dansZone;
+    }
+
+    public int getZone() {
+        return zone;
+    }
+
+    public void setZone(int zone) {
+        this.zone = zone;
     }
 
     public String getNomAdversaire() {

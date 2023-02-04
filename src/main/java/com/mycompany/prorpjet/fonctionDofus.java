@@ -86,20 +86,14 @@ public class fonctionDofus {
     
     public Personnage creationPerso()
     {
-
-        
-        
         Personnage p = new Personnage("", introduction(),
-                55, 55, 5, 5, 20, 150);
-        
+                55, 55, 5, 5, 20);   
         System.out.println("Quel est votre nom disciple " + p.getClassePersonnage()
                 + " ?");
-        
         String nomDuJoueur = s.next();
         p.setNomPersonnage(nomDuJoueur);
         System.out.println("Très bien " + p.getNomPersonnage() + ", disciple " 
                 + p.getClassePersonnage() + ", l'aventure peut commencer !");
-        
         return p;
     }
     public int affChoix()
@@ -108,8 +102,9 @@ public class fonctionDofus {
                 + "1 - Aller sur la place marchande.\n"
                 + "2 - Partir à l'aventure.\n"
                 + "3 - Affronter les gardiens de donjon.\n"
-                + "4 - Se reposer à l'auberge."; 
-        return repet(4, aff);
+                + "4 - Se reposer à la taverne.\n"
+                + "5 - Quitter Dofus."; 
+        return repet(5, aff);
     }
     public int affZone()
     {
@@ -146,6 +141,11 @@ public class fonctionDofus {
             }
         }
         return r;
+    }
+    
+    public int alea()
+    {
+        return (int)(Math.random() * 101);  // 0 to 100
     }
 }
 

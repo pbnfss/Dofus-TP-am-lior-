@@ -17,8 +17,15 @@ public class Personnage {
     private int defense;
     private int coupCritique;
     private int kama;
+    private boolean potion;
 
-    public Personnage(String nomPersonnage, String classePersonnage, int pvActuel, int pvMax, int attaque, int defense, int coupCritique, int kama) 
+    public Personnage(String nomPersonnage,
+            String classePersonnage,
+            int pvActuel,
+            int pvMax,
+            int attaque,
+            int defense,
+            int coupCritique) 
     {
         this.nomPersonnage = nomPersonnage;
         this.classePersonnage = classePersonnage;
@@ -27,8 +34,8 @@ public class Personnage {
         this.attaque = attaque;
         this.defense = defense;
         this.coupCritique = coupCritique;
-        this.kama = kama;
-        
+        this.kama = 150;
+        this.potion = true;
         switch(this.classePersonnage)
         {
             case "Féca":
@@ -149,6 +156,14 @@ public class Personnage {
         this.kama = kama;
     }
 
+    public boolean isPotion() {
+        return potion;
+    }
+
+    public void setPotion(boolean potion) {
+        this.potion = potion;
+    }
+
     
     public void affStats() {
         System.out.println("Ton nom est " + nomPersonnage + ".");
@@ -159,7 +174,22 @@ public class Personnage {
         System.out.println("Tu as " + coupCritique + "% de coup critique !");
         System.out.println("Enfin, tu as "+ kama + " kamas.");
     }
-
+    
+    public void gagneKama(int gainKama)
+    {
+        this.kama += gainKama;
+    }
+    
+    public void pertePv(int degat)
+    {
+        this.pvActuel -= degat;
+        if(this.pvActuel <= 0)
+            this.pvActuel = 0;
+    }
+    public void utilisationPotion()
+    {
+        this.pvActuel = this.pvMax;
+    }
     
    
  
