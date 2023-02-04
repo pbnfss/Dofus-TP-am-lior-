@@ -19,14 +19,31 @@ public class ProRPjet {
         int choixZone = 0;
         int choixBoss = 0;
         int choixCoffre = 0;
-        int gagneKama = 0;
+        int choixTaverne = 0;
+        int choixPlace = 0;
+        int gainKama = 0;
         int nbAlea;
         int nbAleaCoffre;
-        String affCoffre = "Vous trouvez un coffre !\n";
-        affCoffre += "Voulez-vous l'ouvrir ?\n";
-        affCoffre += "1 - Oui\n";
-        affCoffre += "2 - Non\n";
-    
+        String affTaverne = "-----------------------------------------------------\n"
+                + "Voulez-vous vous reposez (250 kames)?\n"
+                + "1 - Oui\n"
+                + "2 - Non\n"
+                + "-----------------------------------------------------\n";
+        String affCoffre = "-----------------------------------------------------\n" 
+                + "Vous trouvez un coffre !\n"
+                + "Voulez-vous l'ouvrir ?\n"
+                + "1 - Oui\n"
+                + "2 - Non\n"
+                + "-----------------------------------------------------\n";
+        String affPlace = "-----------------------------------------------------\n" 
+                + "Que voulez-vous acheter (50 Kamas)?\n"
+                + "1 - Parchemin PV (+5)\n"
+                + "2 - Parchemin Critique (+2)\n"
+                + "3 - Parchemin d'Attaque (+2)\n"
+                + "4 - Parchemin de Défense (+2)\n"
+                + "5 - Potion\n"
+                + "6 - (retour)\n"
+                + "-----------------------------------------------------\n";
         // Zone I
         Adversaire bouftou = new Adversaire("Bouftou affamé",
                 10,
@@ -121,8 +138,78 @@ public class ProRPjet {
             }
             choixChoix = f.affChoix();
             if(choixChoix == 1)
-            {
+            { 
                 System.out.println("Vous arrivez sur la place marchande");
+                choixPlace = f.repet(6, affPlace);
+                if(choixPlace == 1)
+                {
+                    // Parchemin PV
+                    if(joueur.getKama() < 250)
+                        System.out.println("Vous n'avez pas assez de Kamas...");
+                    else
+                    {
+                        joueur.perdreKama(250);
+                        joueur.augPV(5);
+                        System.out.println("Vous avez acheté un parchemin de PV.");
+                        joueur.affKama();
+                    }
+                }
+                if(choixPlace == 2)
+                {
+                    // Parchemin Critique
+                    if(joueur.getKama() < 250)
+                        System.out.println("Vous n'avez pas assez de Kamas...");
+                    else
+                    {
+                        joueur.perdreKama(250);
+                        joueur.augCrit(2);
+                        System.out.println("Vous avez acheté un parchemin Critique.");
+                        joueur.affKama();
+                    }
+                }
+                if(choixPlace == 3)
+                {
+                    // Parchemin Attaque
+                    if(joueur.getKama() < 250)
+                        System.out.println("Vous n'avez pas assez de Kamas...");
+                    else
+                    {
+                        joueur.perdreKama(250);
+                        joueur.augAttaque(2);
+                        System.out.println("Vous avez acheté un parchemin de Attaque.");
+                        joueur.affKama();
+                    }
+                }
+                if(choixPlace == 4)
+                {
+                    // Parchemin Défense
+                    if(joueur.getKama() < 250)
+                        System.out.println("Vous n'avez pas assez de Kamas...");
+                    else
+                    {
+                        joueur.perdreKama(250);
+                        joueur.augDefense(2);
+                        System.out.println("Vous avez acheté un parchemin de Défense.");
+                        joueur.affKama();
+                    }
+                }
+                if(choixPlace == 5)
+                {
+                    // Potion
+                    if(joueur.getKama() < 250)
+                        System.out.println("Vous n'avez pas assez de Kamas...");
+                    else if(joueur.isPotion() == true)
+                    {
+                        System.out.println("Vous avez déjà une potion.");
+                    }
+                    else
+                    {
+                        joueur.perdreKama(250);
+                        joueur.setPotion(true);
+                        System.out.println("Vous avez acheté une potion.");
+                        joueur.affKama();
+                    }
+                }
                 System.out.println("Vous quittez la place marchande");
             }
             if(choixChoix == 2)
@@ -130,6 +217,7 @@ public class ProRPjet {
                 choixZone = f.affZone();
                 if(choixZone == 1)
                 {
+                    
                     System.out.println("Vous vous rendez dans la forêt");
                     nbAlea = f.alea();
                     if(nbAlea < 20)
@@ -165,16 +253,16 @@ public class ProRPjet {
                             }
                         }
                     }
-                    else if(nbAlea < 95)
+                    else if(nbAlea < 85)
                     {
                         // Combat
                     }
                     else
                     {
                         // Trouver
-                        gagneKama = f.alea();
-                        System.out.println("Vous avez trouvé " + gagneKama + " kamas, quelle CHANCE !");
-                        joueur.setKama(gagneKama);
+                        gainKama = f.alea();
+                        System.out.println("Vous avez trouvé " + gainKama + " kamas, quelle CHANCE !");
+                        joueur.gagneKama(gainKama);
                     }
                 }
                 if(choixZone == 2)
@@ -214,16 +302,16 @@ public class ProRPjet {
                             }
                         }
                     }
-                    else if(nbAlea < 90)
+                    else if(nbAlea < 85)
                     {
                         // Combat
                     }
                     else
                     {
                         // Trouver
-                        gagneKama = f.alea()*5;
-                        System.out.println("Vous avez trouvé " + gagneKama + " kamas, quelle CHANCE !");
-                        joueur.setKama(gagneKama);
+                        gainKama = f.alea()*5;
+                        System.out.println("Vous avez trouvé " + gainKama + " kamas, quelle CHANCE !");
+                        joueur.gagneKama(gainKama);
                     }
                 }
                 if(choixZone == 3)
@@ -263,16 +351,16 @@ public class ProRPjet {
                             }
                         }
                     }
-                    else if(nbAlea < 90)
+                    else if(nbAlea < 85)
                     {
                         // Combat
                     }
                     else
                     {
                         // Trouver
-                        gagneKama = f.alea()*10;
-                        System.out.println("Vous avez trouvé " + gagneKama + " kamas, quelle CHANCE !");
-                        joueur.setKama(gagneKama);
+                        gainKama = f.alea()*10;
+                        System.out.println("Vous avez trouvé " + gainKama + " kamas, quelle CHANCE !");
+                        joueur.gagneKama(gainKama);
                     }
                 }   
             }
@@ -309,14 +397,35 @@ public class ProRPjet {
             }
             if(choixChoix == 4)
             {
-                System.out.println("Vous vous posez à la taverne, tranquille");
+                System.out.println("Vous vous posez à la taverne, tranquille.");
+                choixTaverne = f.repet(2, affTaverne);
+                if(choixTaverne == 1)
+                {
+                    if( joueur.getKama() >= 250)
+                    {
+                        joueur.reposTaverne();
+                        System.out.println("Un repos salutaire !");
+                        joueur.perdreKama(250);
+                        joueur.affKama();
+                        joueur.affVie();
+                    }
+                    else
+                    {
+                        System.out.println("Vous n'avez pas assez de Kamas... Dehors !");
+                    }
+                }
+                System.out.println("Vous quittez la taverne.");
             }
             if(choixChoix == 5)
+            {
+                joueur.affStats();
+            }
+            if(choixChoix == 6)
             {
                 break;
             }
         }
-        if(choixChoix != 5)
+        if(choixChoix != 6)
         {
             System.out.println("Vous êtes mort !");   
         }
