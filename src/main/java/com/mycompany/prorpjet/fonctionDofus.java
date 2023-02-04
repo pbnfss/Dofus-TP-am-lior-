@@ -98,30 +98,37 @@ public class fonctionDofus {
     }
     public int affChoix()
     {
-        String aff = "Que veux-tu faire aventurier ?\n"
+        String aff = "-----------------------------------------------------\n"
+                +"Que veux-tu faire aventurier ?\n"
                 + "1 - Aller sur la place marchande.\n"
                 + "2 - Partir à l'aventure.\n"
                 + "3 - Affronter les gardiens de donjon.\n"
                 + "4 - Se reposer à la taverne.\n"
-                + "5 - Quitter Dofus."; 
-        return repet(5, aff);
+                + "5 - Afficher les statistiques de votre personnage.\n"
+                + "6 - Quitter Dofus.\n"
+                +"-----------------------------------------------------\n"; 
+        return repet(6, aff);
     }
     public int affZone()
     {
-        String aff = "Vers où veux-tu aller ?\n"
+        String aff = "-----------------------------------------------------\n"
+                + "Vers où veux-tu aller ?\n"
                 + "1 - Partir dans la forêt d'Incarnam. (zone I)\n"
                 + "2 - Partir vers les champs d'Astrub. (zone II)\n"
                 + "3 - Partir vers le coin des craqueboules. (zone III)\n"
-                + "4 - (retour)"; 
+                + "4 - (retour)\n"
+                + "-----------------------------------------------------\n";
         return repet(4, aff);
     }
     public int affBoss()
     {
-        String aff = "Quelle menace veux-tu éliminer ?\n"
+        String aff = "-----------------------------------------------------\n"
+                + "Quelle menace veux-tu éliminer ?\n"
                 + "1 - Affronter le Milimilou. (boss I)\n"
                 + "2 - Affronter Mob l'Eponge. (boss II)\n"
                 + "3 - Affronter le Bouftou Royal. (boss III)\n"
-                + "4 - (retour)";
+                + "4 - (retour)\n"
+                + "-----------------------------------------------------\n";
         return repet(4, aff);
     }
 

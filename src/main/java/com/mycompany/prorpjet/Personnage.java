@@ -179,7 +179,12 @@ public class Personnage {
     {
         this.kama += gainKama;
     }
-    
+    public void perdreKama(int perdreKama)
+    {
+        this.kama -= perdreKama;
+        if(this.kama < 0)
+            this.kama = 0;
+    }
     public void pertePv(int degat)
     {
         this.pvActuel -= degat;
@@ -190,7 +195,41 @@ public class Personnage {
     {
         this.pvActuel = this.pvMax;
     }
-    
-   
- 
+    public void reposTaverne()
+    {
+        this.pvActuel += 5;
+        if(this.pvActuel > this.pvMax)
+            this.pvActuel = this.pvMax;
+    }
+    public void affKama()
+    {
+        System.out.println("Il vous reste " 
+            + this.getKama()
+            + " kamas.");
+    }
+    public void affVie()
+    {
+        System.out.println("Vous avez désormais : " 
+                + this.getPvActuel()
+                + " / "
+                + this.getPvMax()
+                + " PV.");        
+    }
+    public void augPV(int augmentation)
+    {
+        this.pvActuel += augmentation;
+        this.pvMax += augmentation;
+    }
+    public void augCrit(int augmentation)
+    {
+        this.coupCritique += augmentation;
+    }
+    public void augAttaque(int augmentation)
+    {
+        this.attaque += augmentation;
+    }
+    public void augDefense(int augmentation)
+    {
+        this.defense += augmentation;
+    }
 }
