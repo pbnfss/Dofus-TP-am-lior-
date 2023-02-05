@@ -203,7 +203,7 @@ public class ProRPjet {
                 choixZone = f.affZone();
                 if(choixZone == 1)
                 {
-                    System.out.println("Vous vous rendez dans la forêt");
+                    System.out.println("Vous vous rendez dans la forêt.");
                     nbAlea = f.alea();
                     if(nbAlea < 20)
                     {
@@ -255,7 +255,7 @@ public class ProRPjet {
                 }
                 if(choixZone == 2)
                 {
-                    System.out.println("Vous vous dirigez vers les champs");
+                    System.out.println("Vous vous dirigez vers les champs.");
                     nbAlea = f.alea();
                     if(nbAlea < 20)
                     {
@@ -308,7 +308,7 @@ public class ProRPjet {
                 }
                 if(choixZone == 3)
                 {
-                    System.out.println("Vous atteignez la zone rocheuse");
+                    System.out.println("Vous atteignez la zone rocheuse.");
                     nbAlea = f.alea();
                     if(nbAlea < 20)
                     {
@@ -519,7 +519,6 @@ public class ProRPjet {
             }
             if(a.getPvActuel() < 0)
             {
-                System.out.println("Vous avez gagné, bravo !");
                 return a.getNomAdversaire();
             }
             
