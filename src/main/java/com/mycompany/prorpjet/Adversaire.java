@@ -99,5 +99,23 @@ public class Adversaire {
     public void setBoss(boolean boss) {
         this.boss = boss;
     }
-
+    public void affStatsCombat() {
+        System.out.println(this.nomAdversaire + " :");
+        System.out.println("Il a actuellement " + this.pvActuel + "/" + this.pvMax + " PV.");
+        System.out.println("Il a une attaque de " + this.attaque + ".");
+        System.out.println("Il a une défense de " + this.defense + ".");
+        System.out.println("Enfin, il a " + this.coupCritique + "% de coup critique.");
+        System.out.println("-----------------------------------------------------");
+    }
+    public void subirDegat(int attaquePersonnage, boolean critiquePersonnage)
+    {
+        int degatPersonnage = attaquePersonnage;
+        if(critiquePersonnage)
+            degatPersonnage += attaquePersonnage;
+        degatPersonnage -= this.defense;
+        if(degatPersonnage < 0)
+            degatPersonnage = 0;
+        System.out.println(this.nomAdversaire + " perd "+degatPersonnage+" pv.");
+        this.pvActuel = this.pvActuel - degatPersonnage;
+    }
 }

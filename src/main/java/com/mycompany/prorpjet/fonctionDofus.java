@@ -87,7 +87,7 @@ public class fonctionDofus {
     public Personnage creationPerso()
     {
         Personnage p = new Personnage("", introduction(),
-                55, 55, 5, 5, 20);   
+                55, 55, 5, 1, 20);   
         System.out.println("Quel est votre nom disciple " + p.getClassePersonnage()
                 + " ?");
         String nomDuJoueur = s.next();
@@ -106,7 +106,7 @@ public class fonctionDofus {
                 + "4 - Se reposer à la taverne.\n"
                 + "5 - Afficher les statistiques de votre personnage.\n"
                 + "6 - Quitter Dofus.\n"
-                +"-----------------------------------------------------\n"; 
+                +"-----------------------------------------------------"; 
         return repet(6, aff);
     }
     public int affZone()
@@ -117,7 +117,7 @@ public class fonctionDofus {
                 + "2 - Partir vers les champs d'Astrub. (zone II)\n"
                 + "3 - Partir vers le coin des craqueboules. (zone III)\n"
                 + "4 - (retour)\n"
-                + "-----------------------------------------------------\n";
+                + "-----------------------------------------------------";
         return repet(4, aff);
     }
     public int affBoss()
@@ -128,7 +128,7 @@ public class fonctionDofus {
                 + "2 - Affronter Mob l'Eponge. (boss II)\n"
                 + "3 - Affronter le Bouftou Royal. (boss III)\n"
                 + "4 - (retour)\n"
-                + "-----------------------------------------------------\n";
+                + "-----------------------------------------------------";
         return repet(4, aff);
     }
 

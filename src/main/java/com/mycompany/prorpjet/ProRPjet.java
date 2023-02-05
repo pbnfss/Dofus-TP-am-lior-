@@ -21,35 +21,43 @@ public class ProRPjet {
         int choixCoffre = 0;
         int choixTaverne = 0;
         int choixPlace = 0;
+        int choixRecommencer = 0;
         int gainKama = 0;
         int nbAlea;
         int nbAleaCoffre;
+        Adversaire choixMonstre;
+        String affMonstre;
         String affTaverne = "-----------------------------------------------------\n"
                 + "Voulez-vous vous reposez (250 kames)?\n"
                 + "1 - Oui\n"
                 + "2 - Non\n"
-                + "-----------------------------------------------------\n";
+                + "-----------------------------------------------------";
         String affCoffre = "-----------------------------------------------------\n" 
                 + "Vous trouvez un coffre !\n"
                 + "Voulez-vous l'ouvrir ?\n"
                 + "1 - Oui\n"
                 + "2 - Non\n"
-                + "-----------------------------------------------------\n";
+                + "-----------------------------------------------------";
         String affPlace = "-----------------------------------------------------\n" 
-                + "Que voulez-vous acheter (50 Kamas)?\n"
+                + "Que voulez-vous acheter (250 Kamas)?\n"
                 + "1 - Parchemin PV (+5)\n"
                 + "2 - Parchemin Critique (+2)\n"
                 + "3 - Parchemin d'Attaque (+2)\n"
                 + "4 - Parchemin de Défense (+2)\n"
                 + "5 - Potion\n"
                 + "6 - (retour)\n"
-                + "-----------------------------------------------------\n";
+                + "-----------------------------------------------------";
+        String affRecommencer = "-----------------------------------------------------\n" 
+                + "Voulez-vous recommencer ?\n"
+                + "1 - Oui\n"
+                + "2 - Non\n"
+                + "-----------------------------------------------------";
         // Zone I
         Adversaire bouftou = new Adversaire("Bouftou affamé",
                 10,
                 10,
                 3,
-                5,
+                1,
                 20,
                 false,
                 1);
@@ -57,7 +65,7 @@ public class ProRPjet {
                 5,
                 5,
                 5,
-                3,
+                0,
                 40,
                 false,
                 1);        
@@ -66,7 +74,7 @@ public class ProRPjet {
                 20,
                 20,
                 6,
-                10,
+                5,
                 25,
                 false,
                 2);
@@ -74,7 +82,7 @@ public class ProRPjet {
                 10,
                 10,
                 10,
-                6,
+                3,
                 50,
                 false,
                 2);        
@@ -83,7 +91,7 @@ public class ProRPjet {
                 40,
                 40,
                 12,
-                20,
+                10,
                 30,
                 false,
                 3);
@@ -91,7 +99,7 @@ public class ProRPjet {
                 20,
                 20,
                 20,
-                12,
+                8,
                 60,
                 false,
                 3);        
@@ -100,7 +108,7 @@ public class ProRPjet {
                 20,
                 20,
                 10,
-                10,
+                8,
                 25,
                 true,
                 1);
@@ -109,7 +117,7 @@ public class ProRPjet {
                 40,
                 40,
                 20,
-                20,
+                17,
                 30,
                 true,
                 2);
@@ -118,7 +126,7 @@ public class ProRPjet {
                 80,
                 80,
                 25,
-                25,
+                20,
                 35,
                 true,
                 3);
@@ -132,10 +140,16 @@ public class ProRPjet {
         //joueur.affStats();
         while(true)
         {
-            if(joueur.getPvActuel() == 0)
-            {
+            if(joueur.getPvActuel() < 0)
                 break;
-            }
+            
+            bouftou.setPvActuel(bouftou.getPvMax());
+            tofu.setPvActuel(tofu.getPvMax());
+            tournesol.setPvActuel(tournesol.getPvMax());
+            sanglier.setPvActuel(sanglier.getPvMax());
+            craqueboule.setPvActuel(craqueboule.getPvMax());
+            bandit.setPvActuel(bandit.getPvMax());
+            
             choixChoix = f.affChoix();
             if(choixChoix == 1)
             { 
@@ -152,6 +166,7 @@ public class ProRPjet {
                         joueur.augPV(5);
                         System.out.println("Vous avez acheté un parchemin de PV.");
                         joueur.affKama();
+                        joueur.affVie();
                     }
                 }
                 if(choixPlace == 2)
@@ -165,6 +180,7 @@ public class ProRPjet {
                         joueur.augCrit(2);
                         System.out.println("Vous avez acheté un parchemin Critique.");
                         joueur.affKama();
+                        joueur.affCritique();
                     }
                 }
                 if(choixPlace == 3)
@@ -178,6 +194,7 @@ public class ProRPjet {
                         joueur.augAttaque(2);
                         System.out.println("Vous avez acheté un parchemin de Attaque.");
                         joueur.affKama();
+                        joueur.affAttaque();
                     }
                 }
                 if(choixPlace == 4)
@@ -191,6 +208,7 @@ public class ProRPjet {
                         joueur.augDefense(2);
                         System.out.println("Vous avez acheté un parchemin de Défense.");
                         joueur.affKama();
+                        joueur.affDefense();
                     }
                 }
                 if(choixPlace == 5)
@@ -242,8 +260,9 @@ public class ProRPjet {
                             else if(nbAleaCoffre < 90)
                             {
                                 // Coffre récompense
-                                System.out.println("Vous trouvez 250 kamas !");
-                                joueur.gagneKama(250);
+                                gainKama = f.alea()*5;
+                                System.out.println("Vous trouvez "+gainKama+" kamas !");
+                                joueur.gagneKama(gainKama);
                             }
                             else
                             {
@@ -256,6 +275,20 @@ public class ProRPjet {
                     else if(nbAlea < 85)
                     {
                         // Combat
+                        nbAlea = f.alea();
+                        
+                        if(nbAlea <50)
+                            choixMonstre = bouftou;
+                        else
+                            choixMonstre = tofu;
+                        System.out.println("Attention derrière vous ! Un ... " + choixMonstre.getNomAdversaire() + ". Waouh ça s'annonce épique...");
+                        affMonstre = combat(joueur, choixMonstre);
+                        if(joueur.getPvActuel() < 0)
+                            break;
+                        gainKama = f.alea();
+                        System.out.println("Vous gagnez "+gainKama+" kamas !");
+                        System.out.println("Vous avez vaincu le pitoyable "+affMonstre+" et vous voudriez être félicité ?");
+                        joueur.gagneKama(gainKama);
                     }
                     else
                     {
@@ -290,9 +323,10 @@ public class ProRPjet {
                             }
                             else if(nbAleaCoffre < 90)
                             {
-                                // Coffre récompense
-                                System.out.println("Vous trouvez 750 kamas !");
-                                joueur.gagneKama(750);
+                                // Coffre récompense                               
+                                gainKama = f.alea()*10;
+                                System.out.println("Vous trouvez "+gainKama+" kamas !");
+                                joueur.gagneKama(gainKama);
                             }
                             else
                             {
@@ -305,6 +339,20 @@ public class ProRPjet {
                     else if(nbAlea < 85)
                     {
                         // Combat
+                        nbAlea = f.alea();
+                        
+                        if(nbAlea <50)
+                            choixMonstre = sanglier;
+                        else
+                            choixMonstre = tournesol;
+                        System.out.println("Un " + choixMonstre.getNomAdversaire() + " vous agresse. Fin de la blague.");
+                        affMonstre = combat(joueur, choixMonstre);
+                        if(joueur.getPvActuel() < 0)
+                            break;
+                        gainKama = f.alea();
+                        System.out.println("Vous gagnez "+gainKama+" kamas !");
+                        System.out.println("Vous avez vaincu l'un peu moins pitoyable "+affMonstre+", y'a du mieux.");
+                        joueur.gagneKama(gainKama);
                     }
                     else
                     {
@@ -340,8 +388,9 @@ public class ProRPjet {
                             else if(nbAleaCoffre < 90)
                             {
                                 // Coffre récompense
-                                System.out.println("Vous trouvez 1500 kamas !");
-                                joueur.gagneKama(1500);
+                                gainKama = f.alea()*15;
+                                System.out.println("Vous trouvez"+gainKama+" kamas !");
+                                joueur.gagneKama(gainKama);
                             }
                             else
                             {
@@ -354,6 +403,20 @@ public class ProRPjet {
                     else if(nbAlea < 85)
                     {
                         // Combat
+                        nbAlea = f.alea();
+                        
+                        if(nbAlea <50)
+                            choixMonstre = bandit;
+                        else
+                            choixMonstre = craqueboule;
+                        System.out.println("Un " + choixMonstre.getNomAdversaire() + " vous agresse. Faut dire que vous l'avez mal regardé aussi, assumez maintenant.");
+                        affMonstre = combat(joueur, choixMonstre);
+                        if(joueur.getPvActuel() < 0)
+                            break;
+                        gainKama = f.alea();
+                        System.out.println("Vous gagnez "+gainKama+" kamas !");
+                        System.out.println("Vous avez vaincu le "+affMonstre+", enfin un adversaire que mon fils Jauneau (4 ans) ne peut pas battre.");
+                        joueur.gagneKama(gainKama);
                     }
                     else
                     {
@@ -367,32 +430,52 @@ public class ProRPjet {
             if(choixChoix == 3)
             {
                 choixBoss = f.affBoss();
-                if(choixBoss == 1)
+                if(choixBoss == 1 && (milimilou.getPvActuel() > 0))
                 {
                    System.out.println("Vous voici devant le terrible MILIMILOU");
                    // Combat contre Milimilou
+                   combat(joueur, milimilou);
+                   if(joueur.getPvActuel() < 0)
+                            break;
                    
-                   
-                   
+                   System.out.println("Haha bien joué ! Peut-être le boss le moins impressionnant mais j'avoue que je n'avais pas misé un kama sur vous.");
+                   System.out.println("Maintenant, Mob l'Eponge n'attend que vous, une aventure épique c'est impressionnant.");
                    joueur.setKama(500);
                 }
-                if(choixBoss == 2)
+                else if(choixBoss == 1 && (milimilou.getPvActuel() <= 0))
+                {
+                    System.out.println("Vous ne pouvez pas laisser ce petit chiot tranquille ?? Je vais devoir appeler la SPA...");
+                }
+                if(choixBoss == 2 && (mobEponge.getPvActuel() > 0))
                 {
                    System.out.println("Vous vous attaquez au pitoyable MOB L'EPONGE");
                    // Combat contre Mob l'éponge
+                   combat(joueur, mobEponge);
+                   if(joueur.getPvActuel() < 0)
+                            break;
                    
-                   
-                   
+                   System.out.println("Vous avez galéré à vaincre une éponge, waouh quel exploit.");
+                   System.out.println("Allez vous frotter au BOUFTOU ROYAL maintenant qu'on rigole.");
                    joueur.setKama(1000);
                 }
-                if(choixBoss == 3)
+                else if(choixBoss == 2 && (mobEponge.getPvActuel() <= 0))
+                {
+                    System.out.println("Vous avez déjà épongé Mob l'Eponge. Merci d'ailleurs.");
+                }
+                if(choixBoss == 3 && (bouftouRoyal.getPvActuel() > 0))
                 {
                     System.out.println("Vous foncez sur le colossal BOUFTOU ROYAL");
                     //Combat contre le Bouftou royal
+                    combat(joueur, bouftouRoyal);
+                    if(joueur.getPvActuel() < 0)
+                            break;
                     
-                    
-                    
-                    joueur.setKama(5000);
+                    System.out.println("Vous avez vaincu le terrible BOUFTOU ROYAL (non, il s'est laissé faire).");
+                    System.out.println("Vous avez fini le jeux et êtes maintenant un grand aventurier (non, vous êtes juste en train de faire un tp noté).");
+                }
+                else if(choixBoss == 3 && (bouftouRoyal.getPvActuel() <= 0))
+                {
+                    System.out.println("Vous n'en avez pas assez ? Le jeux est fini pourquoi tu continues ?");
                 }
             }
             if(choixChoix == 4)
@@ -427,49 +510,98 @@ public class ProRPjet {
         }
         if(choixChoix != 6)
         {
-            System.out.println("Vous êtes mort !");   
+            System.out.println("Vous êtes mort !");
+            choixRecommencer = f.repet(2, affRecommencer);
+            if(choixRecommencer == 1)
+            {
+                String[] stri = {"r", "r"};
+                main(stri);
+            }
         }
         System.out.println("Vous quittez Dofus.");
+        
     }
-    
 
-    /*
-    public static void phaseAventure(int choixZone)
+    public static String combat(Personnage p, Adversaire a)
     {
-                if(choixZone == 1)
+        int choixJoueur;
+        int nbAlea;
+        boolean crit;
+        boolean regardeStats;
+        String affChoixCombat = "-----------------------------------------------------\n" 
+                + "Que voulez-vous faire ?\n"
+                + "1 - Afficher statistiques\n"
+                + "2 - Attaquer\n"
+                + "3 - Utiliser une potion\n"
+                + "4 - Fuire\n"
+                + "-----------------------------------------------------";
+        while(true)
+        {
+            if(p.getPvActuel() < 0)
+            {
+                break;   
+            }
+            choixJoueur = f.repet(4, affChoixCombat);
+            regardeStats = false;
+            if(choixJoueur == 1)
+            {
+                // Afficher stats
+                p.affStatsCombat();
+                a.affStatsCombat();  
+                regardeStats = true;
+            }
+            else if(choixJoueur == 2)
+            {
+                // Attaquer
+                System.out.println("Vous attaquez.");
+                nbAlea = f.alea();
+                if(nbAlea < p.getCoupCritique())
+                    crit = true;
+                else
+                    crit = false;
+                a.subirDegat(p.getAttaque(), crit);
+            }
+            else if(choixJoueur == 3)
+            {
+                // Potion
+                if(p.isPotion() == true)
                 {
-                   System.out.println("Vous vous rendez dans la forêt");
-                   s.next();
-                   nbAlea = f.alea();
+                    p.setPotion(false);
+                    p.utilisationPotion();
+                    System.out.println("Vous utilisez la potion.");
+                    System.out.println("...");
+                    System.out.println("Vous avez regagné tous vos pv !");
+                    p.affVie();
                 }
-                if(choixZone == 2)
+                else
                 {
-                   System.out.println("Vous vous dirigez vers les champs");
-                   s.next(); 
+                    System.out.println("Vous n'avez plus de potion...");
                 }
-                if(choixZone == 3)
-                {
-                    System.out.println("Vous vous atteignez la zone rocheuse");
-                    s.next();
-                }    
+            }
+            else
+            {
+                // Fuire
+                System.out.println("Vous fuyez, pleutre !");
+                break;
+            }
+            if(a.getPvActuel() < 0)
+            {
+                System.out.println("Vous avez gagné, bravo !");
+                return a.getNomAdversaire();
+            }
+            
+            // Monstre attaque.
+            if(regardeStats == false)
+            {
+                System.out.println(a.getNomAdversaire() + " attaque.");
+                nbAlea = f.alea();
+                if(nbAlea < a.getCoupCritique())
+                    crit = true;
+                else
+                    crit = false;
+                p.subirDegat(a.getAttaque(), crit);
+            }
+        }
+        return "";
     }
-    public static void phaseBoss(int choixBoss)
-    {
-                if(choixBoss == 1)
-                {
-                   System.out.println("Vous voici devant le terrible MILIMILOU");
-                   s.next(); 
-                }
-                if(choixBoss == 2)
-                {
-                   System.out.println("Vous vous attaquez au pitoyable MOB L'EPONGE");
-                   s.next(); 
-                }
-                if(choixBoss == 3)
-                {
-                    System.out.println("Vous foncez sur le colossal BOUFTOU ROYAL");
-                    s.next();
-                }
-    }
-    */
 }

@@ -39,7 +39,7 @@ public class Personnage {
         switch(this.classePersonnage)
         {
             case "Féca":
-                this.defense += 2;
+                this.defense += 1;
                 this.attaque -= 2;
                 break;
             case "Iop":
@@ -48,7 +48,7 @@ public class Personnage {
                 break;
             case "Cra":
                 this.coupCritique += 10;
-                this.defense -= 2;
+                this.defense -= 1;
                 break;
             case "Sadida":
                 this.attaque += 2;
@@ -60,22 +60,22 @@ public class Personnage {
                 break;
             case "Sacrieur":
                 this.pvMax += 10;
-                this.defense -= 2;
+                this.defense -= 1;
                 break;
             case "Pandawa":
                 this.pvMax += 10;
                 this.coupCritique -= 10;
                 break;
             case "Eniripsa":
-                this.defense += 2;
+                this.defense += 1;
                 this.coupCritique -= 10;
                 break;
             case "Sram":
                 this.attaque += 2;
-                this.defense -= 2;
+                this.defense -= 1;
                 break;
             case "Xélor":
-                this.defense += 2;
+                this.defense += 1;
                 this.pvMax -= 10;
                 break;
             case "Enutrof":
@@ -166,15 +166,31 @@ public class Personnage {
 
     
     public void affStats() {
-        System.out.println("Ton nom est " + nomPersonnage + ".");
-        System.out.println("Tu es un disciple " + classePersonnage + " !");
-        System.out.println("Tu as actuellement " + pvActuel + "/" + pvMax + " PV.");
-        System.out.println("Tu as une attaque de " + attaque + ".");
-        System.out.println("Tu as une défense de " + defense + ".");
-        System.out.println("Tu as " + coupCritique + "% de coup critique !");
-        System.out.println("Enfin, tu as "+ kama + " kamas.");
+        System.out.println("Ton nom est " + this.nomPersonnage + ".");
+        System.out.println("Tu es un disciple " + this.classePersonnage + " !");
+        System.out.println("Tu as actuellement " + this.pvActuel + "/" + this.pvMax + " PV.");
+        System.out.println("Tu as une attaque de " + this.attaque + ".");
+        System.out.println("Tu as une défense de " + this.defense + ".");
+        System.out.println("Tu as " + this.coupCritique + "% de coup critique !");
+        System.out.println("Enfin, tu as "+ this.kama + " kamas.");
+        if(this.isPotion() == true)
+            System.out.println("Vous avez une potion.");
+        else
+            System.out.println("Vous n'avez pas de potion.");
     }
-    
+    public void affStatsCombat() {
+        System.out.println("-----------------------------------------------------");
+        System.out.println(this.nomPersonnage + " :");
+        System.out.println("Tu as actuellement " + this.pvActuel + "/" + this.pvMax + " PV.");
+        System.out.println("Tu as une attaque de " + this.attaque + ".");
+        System.out.println("Tu as une défense de " + this.defense + ".");
+        System.out.println("Tu as " + this.coupCritique + "% de coup critique.");
+        if(this.isPotion() == true)
+            System.out.println("Vous avez une potion.");
+        else
+            System.out.println("Vous n'avez pas de potion.");
+        System.out.println("-----------------------------------------------------");
+    }
     public void gagneKama(int gainKama)
     {
         this.kama += gainKama;
@@ -231,5 +247,28 @@ public class Personnage {
     public void augDefense(int augmentation)
     {
         this.defense += augmentation;
+    }
+    public void affAttaque()
+    {
+        System.out.println("Tu as " + this.attaque + " d'attaque.");
+    }
+    public void affDefense()
+    {
+        System.out.println("Tu as " + this.defense + " de défense.");
+    }
+    public void affCritique()
+    {
+        System.out.println("Tu as " + this.coupCritique + "% de critique.");
+    }
+    public void subirDegat(int attaqueAdversaire, boolean critiqueAdversaire)
+    {
+        int degatAdversaire = attaqueAdversaire;
+        if(critiqueAdversaire)
+            degatAdversaire += attaqueAdversaire;
+        degatAdversaire -= this.defense;
+        if(degatAdversaire < 0)
+            degatAdversaire = 0;
+        System.out.println("Vous perdez "+degatAdversaire+" pv.");
+        this.pvActuel = this.pvActuel - degatAdversaire;
     }
 }
