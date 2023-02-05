@@ -139,8 +139,9 @@ public class fonctionDofus {
         {
             try
             {
-                System.out.println(repet);
-                r = Integer.parseInt(s.next());    
+                System.out.println(repet);              
+                r = Integer.parseInt(s.next()); 
+                
             }
             catch(Exception e)
             {

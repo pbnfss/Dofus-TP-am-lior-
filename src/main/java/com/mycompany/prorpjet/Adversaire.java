@@ -22,9 +22,7 @@ public class Adversaire {
             int unNbPvMax,
             int uneAtk,
             int uneDef,
-            int unCC,
-            boolean estBoss,
-            int dansZone)
+            int unCC)
     {        
         this.nomAdversaire = unNom;
         this.attaque = uneAtk;
@@ -32,8 +30,6 @@ public class Adversaire {
         this.coupCritique = unCC;
         this.pvActuel = unNbPvActuel;
         this.pvMax = unNbPvMax;
-        this.boss = estBoss;
-        this.zone = dansZone;
     }
 
     public int getZone() {
@@ -68,10 +64,6 @@ public class Adversaire {
         return coupCritique;
     }
 
-    public boolean isBoss() {
-        return boss;
-    }
-
     public void setNomAdversaire(String nomAdversaire) {
         this.nomAdversaire = nomAdversaire;
     }
@@ -96,9 +88,7 @@ public class Adversaire {
         this.coupCritique = coupCritique;
     }
 
-    public void setBoss(boolean boss) {
-        this.boss = boss;
-    }
+    
     public void affStatsCombat() {
         System.out.println(this.nomAdversaire + " :");
         System.out.println("Il a actuellement " + this.pvActuel + "/" + this.pvMax + " PV.");

@@ -43,7 +43,7 @@ public class ProRPjet {
                 + "1 - Parchemin PV (+5)\n"
                 + "2 - Parchemin Critique (+2)\n"
                 + "3 - Parchemin d'Attaque (+2)\n"
-                + "4 - Parchemin de Défense (+2)\n"
+                + "4 - Parchemin de Défense (+1)\n"
                 + "5 - Potion\n"
                 + "6 - (retour)\n"
                 + "-----------------------------------------------------";
@@ -58,78 +58,60 @@ public class ProRPjet {
                 10,
                 3,
                 1,
-                20,
-                false,
-                1);
+                20);
         Adversaire tofu = new Adversaire("Tofu immature",
                 5,
                 5,
                 5,
                 0,
-                40,
-                false,
-                1);        
+                40);        
         // Zone II
         Adversaire sanglier = new Adversaire("Sanglier violent",
                 20,
                 20,
                 6,
                 5,
-                25,
-                false,
-                2);
+                25);
         Adversaire tournesol = new Adversaire("Tournesol fou",
                 10,
                 10,
                 10,
                 3,
-                50,
-                false,
-                2);        
+                50);        
         // Zone III
         Adversaire craqueboule = new Adversaire("Craqueboule stupide",
                 40,
                 40,
                 12,
                 10,
-                30,
-                false,
-                3);
+                30);
         Adversaire bandit = new Adversaire("Bandit hargneux",
                 20,
                 20,
                 20,
                 8,
-                60,
-                false,
-                3);        
+                60);        
         // Boss I
         Adversaire milimilou = new Adversaire("Milimilou fourbe",
                 20,
                 20,
                 10,
                 8,
-                25,
-                true,
-                1);
+                25);
         // Boss II
         Adversaire mobEponge = new Adversaire("Mob l'Eponge carré",
                 40,
                 40,
                 20,
                 17,
-                30,
-                true,
-                2);
+                30);
         // Boss III
         Adversaire bouftouRoyal = new Adversaire("Bouftou Royal",
                 80,
                 80,
                 25,
                 20,
-                35,
-                true,
-                3);
+                35);
 
         /*
          * Lance l'introduction.
@@ -137,7 +119,7 @@ public class ProRPjet {
          * Créer le personnage.
         */
         Personnage joueur = f.creationPerso();
-        //joueur.affStats();
+        
         while(true)
         {
             if(joueur.getPvActuel() < 0)
@@ -155,78 +137,64 @@ public class ProRPjet {
             { 
                 System.out.println("Vous arrivez sur la place marchande");
                 choixPlace = f.repet(6, affPlace);
-                if(choixPlace == 1)
+                if(joueur.getKama() >= 250)
                 {
-                    // Parchemin PV
-                    if(joueur.getKama() < 250)
-                        System.out.println("Vous n'avez pas assez de Kamas...");
-                    else
+                    if(choixPlace == 1)
                     {
+                        // Parchemin PV
                         joueur.perdreKama(250);
                         joueur.augPV(5);
                         System.out.println("Vous avez acheté un parchemin de PV.");
                         joueur.affKama();
                         joueur.affVie();
+                        
                     }
-                }
-                if(choixPlace == 2)
-                {
-                    // Parchemin Critique
-                    if(joueur.getKama() < 250)
-                        System.out.println("Vous n'avez pas assez de Kamas...");
-                    else
+                    if(choixPlace == 2)
                     {
+                        // Parchemin Crit
                         joueur.perdreKama(250);
                         joueur.augCrit(2);
                         System.out.println("Vous avez acheté un parchemin Critique.");
                         joueur.affKama();
                         joueur.affCritique();
                     }
-                }
-                if(choixPlace == 3)
-                {
-                    // Parchemin Attaque
-                    if(joueur.getKama() < 250)
-                        System.out.println("Vous n'avez pas assez de Kamas...");
-                    else
+                    if(choixPlace == 3)
                     {
+                        // Parchemin Attaque
                         joueur.perdreKama(250);
                         joueur.augAttaque(2);
                         System.out.println("Vous avez acheté un parchemin de Attaque.");
                         joueur.affKama();
                         joueur.affAttaque();
                     }
-                }
-                if(choixPlace == 4)
-                {
-                    // Parchemin Défense
-                    if(joueur.getKama() < 250)
-                        System.out.println("Vous n'avez pas assez de Kamas...");
-                    else
+                    if(choixPlace == 4)
                     {
+                        // Parchemin Défense
                         joueur.perdreKama(250);
-                        joueur.augDefense(2);
+                        joueur.augDefense(1);
                         System.out.println("Vous avez acheté un parchemin de Défense.");
                         joueur.affKama();
-                        joueur.affDefense();
+                        joueur.affDefense();                        
+                    }
+                    if(choixPlace == 5)
+                    {
+                        // Potion
+                        if(joueur.isPotion() == true)
+                        {
+                            System.out.println("Vous avez déjà une potion.");
+                        }
+                        else
+                        {
+                            joueur.perdreKama(250);
+                            joueur.setPotion(true);
+                            System.out.println("Vous avez acheté une potion.");
+                            joueur.affKama();
+                        }
                     }
                 }
-                if(choixPlace == 5)
+                else
                 {
-                    // Potion
-                    if(joueur.getKama() < 250)
-                        System.out.println("Vous n'avez pas assez de Kamas...");
-                    else if(joueur.isPotion() == true)
-                    {
-                        System.out.println("Vous avez déjà une potion.");
-                    }
-                    else
-                    {
-                        joueur.perdreKama(250);
-                        joueur.setPotion(true);
-                        System.out.println("Vous avez acheté une potion.");
-                        joueur.affKama();
-                    }
+                    System.out.println("Mais enfin, vous n'avez pas assez...");
                 }
                 System.out.println("Vous quittez la place marchande");
             }
@@ -235,7 +203,6 @@ public class ProRPjet {
                 choixZone = f.affZone();
                 if(choixZone == 1)
                 {
-                    
                     System.out.println("Vous vous rendez dans la forêt");
                     nbAlea = f.alea();
                     if(nbAlea < 20)
@@ -246,37 +213,20 @@ public class ProRPjet {
                         {
                             nbAleaCoffre = f.alea();
                             if(nbAleaCoffre < 20)
-                            {
-                                // Coffre piégé
-                                System.out.println("BOOOM !");
-                                System.out.println("Les roublards ont piégé ce coffre");
-                                System.out.println("Vous perdez 5 pv.");
-                                joueur.pertePv(5);
-                                if(joueur.getPvActuel() == 0)
-                                {
-                                    break;
-                                }
-                            }
+                                joueur.pertePv(affCoffrePiege(5));
+                            
                             else if(nbAleaCoffre < 90)
-                            {
-                                // Coffre récompense
-                                gainKama = f.alea()*5;
-                                System.out.println("Vous trouvez "+gainKama+" kamas !");
-                                joueur.gagneKama(gainKama);
-                            }
+                                joueur.gagneKama(affCoffre(5));
+                            
                             else
-                            {
-                                // Coffre vide
-                                System.out.println("Le coffre semble avoir déjà été fouillé...");
-                                System.out.println("Il est vide.");
-                            }
+                                affCoffreVide();    
                         }
                     }
+                    
                     else if(nbAlea < 85)
                     {
                         // Combat
                         nbAlea = f.alea();
-                        
                         if(nbAlea <50)
                             choixMonstre = bouftou;
                         else
@@ -285,10 +235,15 @@ public class ProRPjet {
                         affMonstre = combat(joueur, choixMonstre);
                         if(joueur.getPvActuel() < 0)
                             break;
-                        gainKama = f.alea();
-                        System.out.println("Vous gagnez "+gainKama+" kamas !");
-                        System.out.println("Vous avez vaincu le pitoyable "+affMonstre+" et vous voudriez être félicité ?");
-                        joueur.gagneKama(gainKama);
+                        if(choixMonstre.getPvActuel() <= 0)
+                        {
+                            gainKama = f.alea();
+                            System.out.println("Vous gagnez "+gainKama+" kamas !");
+                            System.out.println("Vous avez vaincu le pitoyable "+affMonstre+" et vous voudriez être félicité ?");
+                            joueur.gagneKama(gainKama);
+                        }
+                        else
+                            System.out.println("Vous ne mériteriez même pas un centikama...");
                     }
                     else
                     {
@@ -310,32 +265,16 @@ public class ProRPjet {
                         if(choixCoffre == 1)
                         {
                             if(nbAleaCoffre < 20)
-                            {
-                                // Coffre piégé
-                                System.out.println("BOOOM !");
-                                System.out.println("Les roublards ont piégé ce coffre");
-                                System.out.println("Vous perdez 15 pv.");
-                                joueur.pertePv(15);
-                                if(joueur.getPvActuel() == 0)
-                                {
-                                    break;
-                                }
-                            }
-                            else if(nbAleaCoffre < 90)
-                            {
-                                // Coffre récompense                               
-                                gainKama = f.alea()*10;
-                                System.out.println("Vous trouvez "+gainKama+" kamas !");
-                                joueur.gagneKama(gainKama);
-                            }
+                                joueur.pertePv(affCoffrePiege(15));
+                            
+                            else if(nbAleaCoffre < 90)                               
+                                joueur.gagneKama(affCoffre(10));
+                            
                             else
-                            {
-                                // Coffre vide
-                                System.out.println("Le coffre semble avoir déjà été fouillé...");
-                                System.out.println("Il est vide.");
-                            }
+                                affCoffreVide();   
                         }
                     }
+                    
                     else if(nbAlea < 85)
                     {
                         // Combat
@@ -349,10 +288,15 @@ public class ProRPjet {
                         affMonstre = combat(joueur, choixMonstre);
                         if(joueur.getPvActuel() < 0)
                             break;
-                        gainKama = f.alea();
-                        System.out.println("Vous gagnez "+gainKama+" kamas !");
-                        System.out.println("Vous avez vaincu l'un peu moins pitoyable "+affMonstre+", y'a du mieux.");
-                        joueur.gagneKama(gainKama);
+                        if(choixMonstre.getPvActuel() <= 0)
+                        {
+                            gainKama = f.alea();
+                            System.out.println("Vous gagnez "+gainKama+" kamas !");
+                            System.out.println("Vous avez vaincu l'un peu moins pitoyable "+affMonstre+", y'a du mieux.");
+                            joueur.gagneKama(gainKama);
+                        }
+                        else
+                            System.out.println("Vous ne mériteriez même pas un centikama...");
                     }
                     else
                     {
@@ -374,32 +318,16 @@ public class ProRPjet {
                         if(choixCoffre == 1)
                         {
                             if(nbAleaCoffre < 20)
-                            {
-                                // Coffre piégé
-                                System.out.println("BOOOM !");
-                                System.out.println("Les roublards ont piégé ce coffre");
-                                System.out.println("Vous perdez 30 pv.");
-                                joueur.pertePv(30);
-                                if(joueur.getPvActuel() == 0)
-                                {
-                                    break;
-                                }
-                            }
+                                joueur.pertePv(affCoffrePiege(5));
+                            
                             else if(nbAleaCoffre < 90)
-                            {
-                                // Coffre récompense
-                                gainKama = f.alea()*15;
-                                System.out.println("Vous trouvez"+gainKama+" kamas !");
-                                joueur.gagneKama(gainKama);
-                            }
+                                joueur.gagneKama(affCoffre(15));
+                            
                             else
-                            {
-                                // Coffre vide
-                                System.out.println("Le coffre semble avoir déjà été fouillé...");
-                                System.out.println("Il est vide.");
-                            }
+                                affCoffreVide();
                         }
                     }
+                    
                     else if(nbAlea < 85)
                     {
                         // Combat
@@ -413,10 +341,15 @@ public class ProRPjet {
                         affMonstre = combat(joueur, choixMonstre);
                         if(joueur.getPvActuel() < 0)
                             break;
-                        gainKama = f.alea();
-                        System.out.println("Vous gagnez "+gainKama+" kamas !");
-                        System.out.println("Vous avez vaincu le "+affMonstre+", enfin un adversaire que mon fils Jauneau (4 ans) ne peut pas battre.");
-                        joueur.gagneKama(gainKama);
+                        if(choixMonstre.getPvActuel() <= 0)
+                        {
+                            gainKama = f.alea();
+                            System.out.println("Vous gagnez "+gainKama+" kamas !");
+                            System.out.println("Vous avez vaincu le "+affMonstre+", enfin un adversaire que mon fils Jauneau (4 ans) ne peut pas battre.");
+                            joueur.gagneKama(gainKama);
+                        }
+                        else
+                            System.out.println("Vous ne mériteriez même pas un centikama...");
                     }
                     else
                     {
@@ -448,7 +381,7 @@ public class ProRPjet {
                 }
                 if(choixBoss == 2 && (mobEponge.getPvActuel() > 0))
                 {
-                   System.out.println("Vous vous attaquez au pitoyable MOB L'EPONGE");
+                   System.out.println("Vous vous attaquez au déplorable MOB L'EPONGE");
                    // Combat contre Mob l'éponge
                    combat(joueur, mobEponge);
                    if(joueur.getPvActuel() < 0)
@@ -604,4 +537,23 @@ public class ProRPjet {
         }
         return "";
     }
+    public static int affCoffre(int multiplicateurGain)
+    {
+        int gainKama = f.alea()*multiplicateurGain;
+        System.out.println("Vous trouvez "+gainKama+" kamas !");
+        return gainKama;
+    }
+    public static int affCoffrePiege(int degat)
+    {
+        System.out.println("BOOOM !");
+        System.out.println("Les roublards ont piégé ce coffre");
+        System.out.println("Vous perdez " + degat +" pv.");
+        return degat;
+    }
+    public static void affCoffreVide()
+    {
+        System.out.println("Le coffre semble avoir déjà été fouillé...");
+        System.out.println("Il est vide.");
+    }
+    
 }
