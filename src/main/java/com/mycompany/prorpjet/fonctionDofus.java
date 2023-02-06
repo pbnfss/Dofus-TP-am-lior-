@@ -87,7 +87,7 @@ public class fonctionDofus {
     public Personnage creationPerso()
     {
         Personnage p = new Personnage("", introduction(),
-                55, 55, 2, 1, 20);   
+                55, 55, 4, 1, 20);   
         System.out.println("Quel est votre nom disciple " + p.getClassePersonnage()
                 + " ?");
         String nomDuJoueur = s.next();
