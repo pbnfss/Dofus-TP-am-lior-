@@ -112,6 +112,13 @@ public class ProRPjet {
                 25,
                 20,
                 35);
+        // Boss final
+        Adversaire BobbyLaMenace = new Adversaire ("Bobby la Menace", 
+                130, 
+                130, 
+                30,
+                40, 
+                50);
 
         /*
          * Lance l'introduction.
@@ -408,7 +415,39 @@ public class ProRPjet {
                 }
                 else if(choixBoss == 3 && (bouftouRoyal.getPvActuel() <= 0))
                 {
-                    System.out.println("Vous n'en avez pas assez ? Le jeux est fini pourquoi tu continues ?");
+                    System.out.println("Vous n'en avez pas assez ? Bouftou Royal est mort, pourquoi tu continues ?");
+                }
+                //Boss de fin (Bobby la menace)
+                if (milimilou.getPvActuel() <= 0 && mobEponge.getPvActuel() <= 0 && bouftouRoyal.getPvActuel() <= 0){
+                    System.out.println("Vous avez tué les trois boss ? Bien...Vous êtes maintenant assez fort pour affronter ce dernier...ennemi. ATTENTION A LA TELEPORTATION !\n"
+                    + "Bon, si vous arrivez à le fumax vous serez récompensé gracieusement...Enfin si vous y arrivez quoi\n"
+                    + " Il attaque !!!! Préparez vous.");
+                    combat(joueur, BobbyLaMenace);
+                    if(joueur.getPvActuel() < 0){
+                    break;
+                    }
+                    else if (BobbyLaMenace.getPvActuel()<=0){
+                           System.out.println("Vous...Vous l'avez eu ? Alors là je suis impressioné ! Tiens, voici une récompense digne de ce combat :\n");
+                           joueur.setKama(5000);
+                           joueur.affKama();
+                           System.out.println("voici une épée et une armure afin de t'aider à combattre tes prochains ennemis");
+                           joueur.augDefense(15);
+                           joueur.augAttaque(22);
+                           joueur.augCrit(10);
+                           joueur.affStats();
+                           System.out.println("Te voilà devenu très fort à présent, mais attention car des dangers règnent toujours\n"
+                                   + "Tu veux quand même continuer l'aventure ? tu risque malheuresement de tout perdre");
+                           Scanner scanner = new Scanner(System.in);
+                           String choixFinal = scanner.next();
+                                 if(choixFinal=="oui" || choixFinal=="o" || choixFinal=="yes"){
+                               System.out.println("Tu es un peu trop téméraire à mon goût ! Le karma te rattrape et tu perds tout tes Kamas");
+                               joueur.setKama(0);
+                                 }
+                                 if(choixFinal=="non" || choixFinal=="n" || choixFinal=="no"){
+                                        System.out.println("Vous me décevez fortement, hors de ma vue espèce de lâche !");
+                                            break;
+                                 }
+                    }
                 }
             }
             if(choixChoix == 4)
