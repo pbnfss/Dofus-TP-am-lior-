@@ -86,8 +86,10 @@ public class Personnage {
                 this.coupCritique += 10;
                 this.pvMax -= 10;
                 break;
-            
-                
+            case "Dieu":
+                this.coupCritique +=300;
+                this.defense+=100;
+                this.attaque+=300;
         }
         this.pvActuel = this.pvMax;
     }
