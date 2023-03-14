@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author erwan
  */
-public class ProRPjet {
+public class ProRPjet { // + 2 Tu m'as bien fait rire, le +2 est bien mérité.
     static fonctionDofus f = new fonctionDofus();
     static Scanner s = new Scanner(System.in);
     public static void main(String[] args) {
